@@ -1,13 +1,11 @@
-import Vue from "vue";
-import App from "./App";
-
+import Vue from 'vue'
+import App from './App.vue'
 import VueKonva from "vue-konva";
+
+Vue.config.productionTip = false
 
 Vue.use(VueKonva);
 
-/* eslint-disable no-new */
 new Vue({
-  el: "#app",
-  components: { App },
-  template: "<App/>"
-});
+  render: h => h(App),
+}).$mount('#app')

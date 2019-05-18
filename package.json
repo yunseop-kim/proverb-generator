@@ -1,18 +1,48 @@
 {
-  "name": "vue-konva-template",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/main.js",
+  "name": "proverb-generator",
+  "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "konva": "3.2.3",
-    "vue": "^2.5.2",
-    "vue-konva": "2.0.3"
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "keywords": [
-    "vue",
-    "canvas",
-    "vue-konva",
-    "konva"
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "konva": "^3.2.6",
+    "vue": "^2.6.10",
+    "vue-konva": "^2.0.6"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.21"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
   ]
 }

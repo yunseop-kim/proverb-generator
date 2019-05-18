@@ -90,13 +90,9 @@ export default {
     };
   },
   watch: {
-    proverb(oldVal) {
+    proverb() {
       const proverbNode = this.$refs.proverb.getStage();
-      // const quotationNode = this.$refs.quotation.getStage();
-      const quotationDefaultHeight = 20;
-      const proverbDefaultHeight = 15;
       const textWidth = proverbNode.getTextWidth();
-      console.log(textWidth);
       this.textPosX = (400 - textWidth) / 2;
       this.textPosY = 350;
     }
@@ -110,7 +106,6 @@ export default {
       image.onload = function() {
         if (this.width > 400 || this.height > 400) {
           const w = Math.round(this.width / 400);
-          console.log(`w:${w}`);
           // const h = Math.ceil(this.height / 400);
           this.width = this.width / (w + 1);
           this.height = this.height / (w + 1);
