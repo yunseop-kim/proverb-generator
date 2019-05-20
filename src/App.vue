@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>명언 제조기</h2>
+    <h3>이 글을 보고 영감을 얻었습니다. <a href="http://mlbpark.donga.com/mp/b.php?p=1&b=bullpen&id=201707160006344965&select=&query=&user=&site=&reply=&source=&sig=h6jBSY21j3DRKfX@hca9Sl-g4hlq">(링크)</a></h3>
     <div>
       <input type="file" accept="image/*" @change="onFileChange">
       <button @click="save">Save</button>
@@ -8,10 +9,10 @@
     <div>
       <label>내용 입력</label>
       <br>
-      <textarea type="text" v-model="proverb"/>
+      <textarea type="text" v-model="configs.proverb.text"/>
     </div>
     <div style="border: 1px solid #444444; width: 400px; height: 400px;">
-      <v-stage id="stage" ref="stage" @mousedown="handleStageMouseDown" :config="stageSize">
+      <v-stage name="stage" ref="stage" @mousedown="handleStageMouseDown" :config="stageSize">
         <v-layer ref="dragLayer">
           <v-rect
             :config="{
@@ -23,14 +24,8 @@
             }"
           />
           <v-image
-            v-if="image"
-            :config="{
-                name: 'image',
-                image,
-                draggable: true,
-                x: posX,
-                y: posY
-              }"
+            v-if="configs.image.image"
+            :config="configs.image"
             @dragstart="handleDragStart"
             @dragend="handleDragEnd"
           />
@@ -47,20 +42,7 @@
               fill: '#dfe2e5'
             }"
           />-->
-          <v-text
-            ref="proverb"
-            :config="{
-              name: 'proverb',
-            text: proverb,
-            align: 'center',
-            fontSize: 15,
-            lineHeight: 1,
-            fill: '#aeaeae',
-            draggable: true,
-            x: textPosX,
-            y: textPosY
-          }"
-          />
+          <v-text ref="proverb" :config="configs.proverb"/>
         </v-layer>
       </v-stage>
     </div>
@@ -76,25 +58,39 @@ export default {
     return {
       selectedShapeName: "",
       isDragging: false,
-      image: null,
       list: [],
-      proverb: "",
-      posX: 0,
-      posY: 0,
-      textPosX: 65,
-      textPosY: 350,
       stageSize: {
         width: width,
         height: height
+      },
+      configs: {
+        image: {
+          name: "image",
+          image: null,
+          draggable: true,
+          x: 0,
+          y: 0
+        },
+        proverb: {
+          name: "proverb",
+          text: "",
+          align: "center",
+          fontSize: 15,
+          lineHeight: 1,
+          fill: "#aeaeae",
+          draggable: true,
+          x: 65,
+          y: 350
+        }
       }
     };
   },
   watch: {
-    proverb() {
+    'configs.proverb.text'() {
       const proverbNode = this.$refs.proverb.getStage();
       const textWidth = proverbNode.getTextWidth();
-      this.textPosX = (400 - textWidth) / 2;
-      this.textPosY = 350;
+      this.configs.proverb.x = (400 - textWidth) / 2;
+      this.configs.proverb.y = 350;
     }
   },
   methods: {
@@ -110,9 +106,9 @@ export default {
           this.width = this.width / (w + 1);
           this.height = this.height / (w + 1);
         }
-        self.posX = 200 - this.width * 0.5;
-        self.posY = 50;
-        self.image = image;
+        self.configs.image.x = 200 - this.width * 0.5;
+        self.configs.image.y = 50;
+        self.configs.image.image = image;
       };
     },
 
